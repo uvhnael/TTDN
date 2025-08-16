@@ -1,0 +1,6 @@
+[submodule "kien-truc-an-lac"]
+	path = kien-truc-an-lac
+	url = https://github.com/uvhnael/KTAL-customer.git
+[submodule "admin"]
+	path = admin
+	url = https://github.com/uvhnael/ktal-admin.git
