@@ -11,9 +11,9 @@ public class ContactRepository extends BaseRepository<Contact> {
         super(jdbcTemplate, Contact.class, "contact");
     }
 
-    public int save(Contact entity) {
+    public Contact save(Contact entity) {
         String sql = "INSERT INTO contact (name, phone, email, service_id, message, status, created_at) VALUES (?, ?, ?, ?,?, ?, ?)";
-        return jdbcTemplate.update(sql,
+        jdbcTemplate.update(sql,
                 entity.getName(),
                 entity.getPhone(),
                 entity.getEmail(),
@@ -22,6 +22,9 @@ public class ContactRepository extends BaseRepository<Contact> {
                 entity.getStatus(),
                 entity.getCreatedAt()
         );
+        Long id = jdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", Long.class);
+        entity.setId(id);
+        return entity;
     }
 
     public int update(Contact entity) {

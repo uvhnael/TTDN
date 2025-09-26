@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.uvhnael.ktal.model.Contact;
 import org.uvhnael.ktal.repository.ContactRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +23,9 @@ public class ContactService {
         return contactRepository.findById(id);
     }
 
-    public int create(Contact contact) {
+    public Contact create(Contact contact) {
         contact.setStatus("Đang chờ xử lý");
+        contact.setCreatedAt(LocalDateTime.now().toString());
         return contactRepository.save(contact);
     }
 
@@ -43,7 +45,7 @@ public class ContactService {
         return contactRepository.updateStatus(id, status);
     }
 
-    public int updateHandled(Long handleBy, String handledAt, Long id ) {
+    public int updateHandled(Long handleBy, String handledAt, Long id) {
         return contactRepository.updateHandled(handleBy, handledAt, id);
     }
 }

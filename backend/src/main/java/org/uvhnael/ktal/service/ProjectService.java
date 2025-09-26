@@ -3,8 +3,6 @@ package org.uvhnael.ktal.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.uvhnael.ktal.model.Project;
-import org.uvhnael.ktal.model.ProjectImage;
-import org.uvhnael.ktal.repository.ProjectImageRepository;
 import org.uvhnael.ktal.repository.ProjectRepository;
 
 import java.time.LocalDateTime;
@@ -16,7 +14,6 @@ import java.util.Optional;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
-    private final ProjectImageRepository projectImageRepository;
 
     public List<Project> findAll() {
         return projectRepository.findAll();
@@ -34,6 +31,7 @@ public class ProjectService {
     }
 
     public int update(Project project) {
+        project.setUpdatedAt(LocalDateTime.now().toString());
         return projectRepository.update(project);
     }
 
@@ -41,11 +39,7 @@ public class ProjectService {
         return projectRepository.deleteById(id);
     }
 
-    public int deleteImage(Long id) {
-        return projectImageRepository.deleteById(id);
-    }
-
-    public int createImage(ProjectImage image) {
-        return projectImageRepository.save(image);
+    public Project findBySlug(String slug) {
+        return projectRepository.findBySlug(slug);
     }
 }

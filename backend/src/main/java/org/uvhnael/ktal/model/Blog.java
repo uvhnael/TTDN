@@ -7,15 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Project {
+public class Blog {
     private Long id;
     private String title;
     private String slug;
-    private String description;
-    private Integer year;
-    private String area;
+    private String author;
+    private String category;
     private String thumbnail;
-    private String content;   // HTML hoặc text
+    private String content;
     private String status;
     private String createdAt;
     private String updatedAt;
